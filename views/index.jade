@@ -1,0 +1,62 @@
+extends ./layout.jade
+
+block styles
+  //-style(type='text/css', media='screen, projection')
+  style(type='text/css', media='screen, projection').
+    #placeholder {
+      height: 640px;
+    }
+    //-#loginForm .form-row
+    //-{
+      //-margin-bottom: 5px;
+    //-}
+    //-#loginForm input[type=text], #loginForm textarea, #loginForm label
+    //-{
+      //-margin: 0;
+    //-}
+    //-#loginForm label
+    //-{
+      //-font-weight: bold;
+      //-display: inline-block;
+      //-margin-right: 0.8em;
+    //-}
+    //-#txt-nickname {
+    //-}
+    #errNoNickname
+      {
+      margin-left: 1em;
+      color: red;
+    }
+    span.ipt-err
+      {
+      color: red;
+      padding: 0 0.5em;
+    }
+
+block content
+  #placeholder
+  #loginForm.modal.fade(role='dialog')
+    .modal-dialog
+      .modal-content
+        .modal-header
+          h3.modal-title One Poker - Create your Sprint poker Session!
+        .modal-body
+          form#f.form-horizontal(action='/', method='post', role='form')
+            #ph-room-name.form-group
+              label.col-sm-3.control-label(for='txt-room-name') Session Name
+              .col-sm-8
+                input#txt-room-name.form-control(name='txt-room-name', type='text', placeholder='Session name for your team', autofocus='autofocus')
+                span#errNoRoomName.hide.ipt-err Seesion name is required!
+            #ph-stories.form-group
+              label.col-sm-3.control-label(for='txt-stories') Stories
+              .col-sm-8
+                textarea#txt-stories.form-control(name='txt-stories', rows='6', placeholder='Paste a list of user stories here (separate by newline)')
+            .form-group
+              label.col-sm-3.control-label(for='txt-nickname') Your Nick Name
+              .col-sm-8
+                input#txt-nickname.form-control(name='txt-nickname', type='text', placeholder='Input your name here')
+                span#errNoNickname.hide.ipt-err Nick name is required!
+        .modal-footer
+          button#btnLogin.btn.btn-primary(href='#') Join
+block scripts
+  script(src='javascripts/index.js')

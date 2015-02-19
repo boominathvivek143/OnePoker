@@ -1,0 +1,87 @@
+<html>
+<head>
+    <title>iisnode logs</title>
+    <style type="text/css">
+        body
+        {
+            font-family: "Trebuchet MS" , Arial, Helvetica, sans-serif;
+        }
+        table
+        {
+            border-collapse: collapse;
+        }
+        td, th
+        {
+            border: 1px solid lightgray;
+            padding: 3px 7px 2px 7px;
+        }
+        th
+        {
+            text-align: left;
+            padding-top: 5px;
+            padding-bottom: 4px;
+            background-color: Gray;
+            color: #ffffff;
+        }
+        td.stderr
+        {
+            color: Red;
+        }
+    </style>
+</head>
+<body>
+    <table id="logFilesTable">
+        <tr>
+            <th>
+                Computer name
+            </th>
+            <th>
+                PID
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Created
+            </th>
+            <th>
+                Link
+            </th>
+        </tr>
+    </table>
+    <p id="lastUpdated"></p>
+    <script type="text/javascript">
+
+        // this is replaced with actual data at runtime by code in interceptor.js
+        var logFiles = [{"file":"W7BVIVEK-2084-stderr-1424326822118.txt","computername":"W7BVIVEK","pid":2084,"type":"stderr","created":1424326822118},{"file":"W7BVIVEK-2084-stdout-1424326822118.txt","computername":"W7BVIVEK","pid":2084,"type":"stdout","created":1424326822118},{"file":"W7BVIVEK-2864-stderr-1424330311229.txt","computername":"W7BVIVEK","pid":2864,"type":"stderr","created":1424330311229},{"file":"W7BVIVEK-2864-stdout-1424330311227.txt","computername":"W7BVIVEK","pid":2864,"type":"stdout","created":1424330311227},{"file":"W7BVIVEK-5044-stdout-1424326727563.txt","computername":"W7BVIVEK","pid":5044,"type":"stdout","created":1424326727563},{"file":"W7BVIVEK-6272-stderr-1424336010538.txt","computername":"W7BVIVEK","pid":6272,"type":"stderr","created":1424336010538},{"file":"W7BVIVEK-6272-stdout-1424336010536.txt","computername":"W7BVIVEK","pid":6272,"type":"stdout","created":1424336010536},{"file":"W7BVIVEK-7388-stderr-1424326774365.txt","computername":"W7BVIVEK","pid":7388,"type":"stderr","created":1424326774365},{"file":"W7BVIVEK-7388-stdout-1424326774364.txt","computername":"W7BVIVEK","pid":7388,"type":"stdout","created":1424326774364},{"file":"W7BVIVEK-8284-stderr-1424329933280.txt","computername":"W7BVIVEK","pid":8284,"type":"stderr","created":1424329933280},{"file":"W7BVIVEK-8284-stdout-1424329933278.txt","computername":"W7BVIVEK","pid":8284,"type":"stdout","created":1424329933278},{"file":"W7BVIVEK-8284-stdout-1424330156164.txt","computername":"W7BVIVEK","pid":8284,"type":"stdout","created":1424330156164},{"file":"W7BVIVEK-8284-stdout-1424330247097.txt","computername":"W7BVIVEK","pid":8284,"type":"stdout","created":1424330247097},{"file":"W7BVIVEK-9524-stderr-1424332926299.txt","computername":"W7BVIVEK","pid":9524,"type":"stderr","created":1424332926299},{"file":"W7BVIVEK-9524-stdout-1424332926297.txt","computername":"W7BVIVEK","pid":9524,"type":"stdout","created":1424332926297}];
+        var lastUpdated = 1424336010755;
+        var date = new Date();
+
+        date.setTime(lastUpdated);
+        document.getElementById('lastUpdated').innerHTML = 'Index was last updated ' + date;
+
+        logFiles.sort(function (a, b) {
+            return b.created - a.created;
+        });
+
+        var logFilesTable = document.getElementById("logFilesTable");
+        for (var i = 0; i < logFiles.length; i++) {
+            var logFile = logFiles[i];
+            date.setTime(logFile.created);
+            var row = logFilesTable.insertRow(-1);
+            var computerNameCell = row.insertCell(0);
+            var pidCell = row.insertCell(1);
+            var typeCell = row.insertCell(2);
+            var dateCell = row.insertCell(3);
+            var logCell = row.insertCell(4);
+            computerNameCell.innerHTML = logFile.computername;
+            pidCell.innerHTML = logFile.pid.toString();
+            typeCell.innerHTML = logFile.type;
+            typeCell.setAttribute('class', logFile.type);
+            dateCell.innerHTML = date.toString();
+            logCell.innerHTML = '<a href="' + logFile.file + '">log</a>';
+        };
+
+    </script>
+</body>
+</html>
